@@ -14,7 +14,7 @@ Adding dependency to pubspec.yaml
 
 ```
   dependencies:
-    google_plusdomains_v1_api: '>=0.4.0'
+    google_plusdomains_v1_api: '>=0.4.1'
 ```
 
 For web applications:
