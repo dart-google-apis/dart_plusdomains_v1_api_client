@@ -2042,6 +2042,9 @@ class Media {
   /** The type of resource. */
   core.String kind;
 
+  /** The time at which this media was originally created in UTC. Formatted as an RFC 3339 timestamp that matches this example: 2010-11-25T14:30:27.655Z */
+  core.String mediaCreatedTime;
+
   /** The URL of this photo or video's still image. */
   core.String mediaUrl;
 
@@ -2099,6 +2102,9 @@ class Media {
     if (json.containsKey("kind")) {
       kind = json["kind"];
     }
+    if (json.containsKey("mediaCreatedTime")) {
+      mediaCreatedTime = json["mediaCreatedTime"];
+    }
     if (json.containsKey("mediaUrl")) {
       mediaUrl = json["mediaUrl"];
     }
@@ -2155,6 +2161,9 @@ class Media {
     }
     if (kind != null) {
       output["kind"] = kind;
+    }
+    if (mediaCreatedTime != null) {
+      output["mediaCreatedTime"] = mediaCreatedTime;
     }
     if (mediaUrl != null) {
       output["mediaUrl"] = mediaUrl;
