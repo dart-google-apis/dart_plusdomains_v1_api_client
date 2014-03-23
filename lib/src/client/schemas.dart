@@ -1110,6 +1110,9 @@ class ActivityObjectStatusForViewer {
   /** Whether the viewer can +1 the activity. */
   core.bool canPlusone;
 
+  /** Whether the viewer can edit or delete the activity. */
+  core.bool canUpdate;
+
   /** Whether the viewer has +1'd the activity. */
   core.bool isPlusOned;
 
@@ -1123,6 +1126,9 @@ class ActivityObjectStatusForViewer {
     }
     if (json.containsKey("canPlusone")) {
       canPlusone = json["canPlusone"];
+    }
+    if (json.containsKey("canUpdate")) {
+      canUpdate = json["canUpdate"];
     }
     if (json.containsKey("isPlusOned")) {
       isPlusOned = json["isPlusOned"];
@@ -1141,6 +1147,9 @@ class ActivityObjectStatusForViewer {
     }
     if (canPlusone != null) {
       output["canPlusone"] = canPlusone;
+    }
+    if (canUpdate != null) {
+      output["canUpdate"] = canUpdate;
     }
     if (isPlusOned != null) {
       output["isPlusOned"] = isPlusOned;
@@ -1297,6 +1306,9 @@ class Audience {
   /** Identifies this resource as an audience. Value: "plus#audience". */
   core.String kind;
 
+  /** The number of people in this circle. This only applies if entity_type is CIRCLE. */
+  core.int memberCount;
+
   /** The circle members' visibility as chosen by the owner of the circle. This only applies for items with "item.type" equals "circle". Possible values are:  
 - "public" - Members are visible to the public. 
 - "limited" - Members are visible to a limited audience. 
@@ -1313,6 +1325,9 @@ class Audience {
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
+    }
+    if (json.containsKey("memberCount")) {
+      memberCount = json["memberCount"];
     }
     if (json.containsKey("visibility")) {
       visibility = json["visibility"];
@@ -1331,6 +1346,9 @@ class Audience {
     }
     if (kind != null) {
       output["kind"] = kind;
+    }
+    if (memberCount != null) {
+      output["memberCount"] = memberCount;
     }
     if (visibility != null) {
       output["visibility"] = visibility;
@@ -2070,6 +2088,7 @@ class Media {
   core.int videoDuration;
 
   /** The encoding status of this video. Possible values are:  
+- "UPLOADING" - Not all the video bytes have been received. 
 - "PENDING" - Video not yet processed. 
 - "FAILED" - Video processing failed. 
 - "READY" - A single video stream is playable. 
@@ -2411,7 +2430,7 @@ class Person {
   /** The "bragging rights" line of this person. */
   core.String braggingRights;
 
-  /** If a Google+ Page and for followers who are visible, the number of people who have added this page to a circle. */
+  /** For followers who are visible, the number of people who have added this person or page to a circle. */
   core.int circledByCount;
 
   /** The cover photo content. */
@@ -2422,6 +2441,12 @@ class Person {
 
   /** The name of this person, which is suitable for display. */
   core.String displayName;
+
+  /** The hosted domain name for the user's Google Apps account. For instance, example.com. The plus.profile.emails.read or email scope is needed to get this domain name. */
+  core.String domain;
+
+  /** A list of email addresses that this person has, including their Google account email address, and the public verified email addresses on their Google+ profile. The plus.profile.emails.read scope is needed to retrieve these email addresses, or the email scope can be used to retrieve just the Google account email address. */
+  core.List<PersonEmails> emails;
 
   /** ETag of this response for caching purposes. */
   core.String etag;
@@ -2455,6 +2480,9 @@ class Person {
 - "page" - represents a page. */
   core.String objectType;
 
+  /** The occupation of this person. */
+  core.String occupation;
+
   /** A list of current or past organizations with which this person is associated. */
   core.List<PersonOrganizations> organizations;
 
@@ -2475,6 +2503,9 @@ class Person {
 - "in_domestic_partnership" - Person is in a domestic partnership. 
 - "in_civil_union" - Person is in a civil union. */
   core.String relationshipStatus;
+
+  /** The person's skills. */
+  core.String skills;
 
   /** The brief description (tagline) of this person. */
   core.String tagline;
@@ -2511,6 +2542,12 @@ class Person {
     if (json.containsKey("displayName")) {
       displayName = json["displayName"];
     }
+    if (json.containsKey("domain")) {
+      domain = json["domain"];
+    }
+    if (json.containsKey("emails")) {
+      emails = json["emails"].map((emailsItem) => new PersonEmails.fromJson(emailsItem)).toList();
+    }
     if (json.containsKey("etag")) {
       etag = json["etag"];
     }
@@ -2538,6 +2575,9 @@ class Person {
     if (json.containsKey("objectType")) {
       objectType = json["objectType"];
     }
+    if (json.containsKey("occupation")) {
+      occupation = json["occupation"];
+    }
     if (json.containsKey("organizations")) {
       organizations = json["organizations"].map((organizationsItem) => new PersonOrganizations.fromJson(organizationsItem)).toList();
     }
@@ -2549,6 +2589,9 @@ class Person {
     }
     if (json.containsKey("relationshipStatus")) {
       relationshipStatus = json["relationshipStatus"];
+    }
+    if (json.containsKey("skills")) {
+      skills = json["skills"];
     }
     if (json.containsKey("tagline")) {
       tagline = json["tagline"];
@@ -2589,6 +2632,12 @@ class Person {
     if (displayName != null) {
       output["displayName"] = displayName;
     }
+    if (domain != null) {
+      output["domain"] = domain;
+    }
+    if (emails != null) {
+      output["emails"] = emails.map((emailsItem) => emailsItem.toJson()).toList();
+    }
     if (etag != null) {
       output["etag"] = etag;
     }
@@ -2616,6 +2665,9 @@ class Person {
     if (objectType != null) {
       output["objectType"] = objectType;
     }
+    if (occupation != null) {
+      output["occupation"] = occupation;
+    }
     if (organizations != null) {
       output["organizations"] = organizations.map((organizationsItem) => organizationsItem.toJson()).toList();
     }
@@ -2627,6 +2679,9 @@ class Person {
     }
     if (relationshipStatus != null) {
       output["relationshipStatus"] = relationshipStatus;
+    }
+    if (skills != null) {
+      output["skills"] = skills;
     }
     if (tagline != null) {
       output["tagline"] = tagline;
@@ -2778,6 +2833,47 @@ class PersonCoverCoverPhoto {
   }
 
   /** Return String representation of PersonCoverCoverPhoto */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class PersonEmails {
+
+  /** The type of address. Possible values include, but are not limited to, the following values:  
+- "account" - Google account email address. 
+- "home" - Home email address. 
+- "work" - Work email address. 
+- "other" - Other. */
+  core.String type;
+
+  /** The email address. */
+  core.String value;
+
+  /** Create new PersonEmails from JSON data */
+  PersonEmails.fromJson(core.Map json) {
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+    if (json.containsKey("value")) {
+      value = json["value"];
+    }
+  }
+
+  /** Create JSON Object for PersonEmails */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (type != null) {
+      output["type"] = type;
+    }
+    if (value != null) {
+      output["value"] = value;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of PersonEmails */
   core.String toString() => JSON.encode(this.toJson());
 
 }

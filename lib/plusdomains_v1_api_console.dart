@@ -33,6 +33,12 @@ class PlusDomains extends Client with ConsoleClient {
   /** OAuth Scope2: Manage your Google+ posts, comments, and stream */
   static const String PLUS_STREAM_WRITE_SCOPE = "https://www.googleapis.com/auth/plus.stream.write";
 
+  /** OAuth Scope2: View your email address */
+  static const String USERINFO_EMAIL_SCOPE = "https://www.googleapis.com/auth/userinfo.email";
+
+  /** OAuth Scope2: View basic information about your account */
+  static const String USERINFO_PROFILE_SCOPE = "https://www.googleapis.com/auth/userinfo.profile";
+
   final oauth2.OAuth2Console auth;
 
   PlusDomains([oauth2.OAuth2Console this.auth]);
