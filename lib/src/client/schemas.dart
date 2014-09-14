@@ -2436,7 +2436,7 @@ class Person {
   /** The cover photo content. */
   PersonCover cover;
 
-  /** The current location for this person. */
+  /** (this field is not currently used) */
   core.String currentLocation;
 
   /** The name of this person, which is suitable for display. */
@@ -2881,11 +2881,17 @@ class PersonEmails {
 /** The representation of the person's profile photo. */
 class PersonImage {
 
+  /** Whether the person's profile photo is the default one */
+  core.bool isDefault;
+
   /** The URL of the person's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side. */
   core.String url;
 
   /** Create new PersonImage from JSON data */
   PersonImage.fromJson(core.Map json) {
+    if (json.containsKey("isDefault")) {
+      isDefault = json["isDefault"];
+    }
     if (json.containsKey("url")) {
       url = json["url"];
     }
@@ -2895,6 +2901,9 @@ class PersonImage {
   core.Map toJson() {
     var output = new core.Map();
 
+    if (isDefault != null) {
+      output["isDefault"] = isDefault;
+    }
     if (url != null) {
       output["url"] = url;
     }
@@ -3178,6 +3187,9 @@ class Place {
   /** The display name of the place. */
   core.String displayName;
 
+  /** The id of the place. */
+  core.String id;
+
   /** Identifies this resource as a place. Value: "plus#place". */
   core.String kind;
 
@@ -3191,6 +3203,9 @@ class Place {
     }
     if (json.containsKey("displayName")) {
       displayName = json["displayName"];
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -3209,6 +3224,9 @@ class Place {
     }
     if (displayName != null) {
       output["displayName"] = displayName;
+    }
+    if (id != null) {
+      output["id"] = id;
     }
     if (kind != null) {
       output["kind"] = kind;
